@@ -5,268 +5,30 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Camilo Sánchez | CV</title>
 
-  <!-- =====================================================
-    PASO 1 — ENLAZAR BOOTSTRAP VÍA CDN
-    Bootstrap se carga desde internet con una etiqueta <link>.
-    Esto nos da acceso a todas sus clases CSS sin instalar nada.
-    Siempre va dentro de <head>, antes de tu propio CSS.
-  ====================================================== -->
+  <!-- PASO 1: Bootstrap CDN (siempre primero) -->
   <link
     href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css"
     rel="stylesheet"
   />
 
-  <!-- Google Fonts: Playfair Display (títulos) + DM Sans (cuerpo) -->
+  <!-- Google Fonts -->
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link
     href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@700&family=DM+Sans:wght@300;400;500&display=swap"
     rel="stylesheet"
   />
 
-  <!-- =====================================================
-    PASO 2 — CSS PROPIO (custom)
-    Siempre va DESPUÉS del link de Bootstrap para que tus
-    estilos puedan sobreescribir los de Bootstrap si es necesario.
-    Usamos variables CSS (--variable) para mantener colores consistentes.
-  ====================================================== -->
-  <style>
-    /* Variables de color — cámbialas aquí y se actualizan en todo el CV */
-    :root {
-      --color-primary:   #1a1a2e;   /* azul oscuro casi negro */
-      --color-accent:    #e63946;   /* rojo coral */
-      --color-light:     #f8f5f0;   /* blanco cálido (fondo) */
-      --color-muted:     #6c757d;
-      --font-display:    'Playfair Display', serif;
-      --font-body:       'DM Sans', sans-serif;
-    }
-
-    body {
-      font-family: var(--font-body);
-      background-color: var(--color-light);
-      color: var(--color-primary);
-    }
-
-    /* =====================================================
-      PASO 3 — BARRA DE NAVEGACIÓN CON BOOTSTRAP
-      Usamos la clase .navbar de Bootstrap.
-      .navbar-expand-lg → se despliega en pantallas grandes.
-      .sticky-top        → queda fija al hacer scroll.
-    ====================================================== */
-    .navbar {
-      background-color: var(--color-primary);
-      font-family: var(--font-body);
-      letter-spacing: 0.05em;
-    }
-    .navbar-brand {
-      font-family: var(--font-display);
-      color: #fff !important;
-      font-size: 1.3rem;
-    }
-    .nav-link {
-      color: rgba(255,255,255,0.75) !important;
-      font-size: 0.85rem;
-      font-weight: 500;
-      text-transform: uppercase;
-      letter-spacing: 0.08em;
-      transition: color 0.2s;
-    }
-    .nav-link:hover {
-      color: var(--color-accent) !important;
-    }
-
-    /* =====================================================
-      PASO 4 — HERO SECTION
-      Aquí aplicamos estilos propios encima del grid de Bootstrap.
-      Bootstrap sólo da la estructura (contenedor, columnas);
-      el diseño visual lo hacemos nosotros.
-    ====================================================== */
-    .hero {
-      background-color: var(--color-primary);
-      color: #fff;
-      padding: 6rem 0 4rem;
-      position: relative;
-      overflow: hidden;
-    }
-    .hero::after {
-      /* Detalle decorativo: línea diagonal */
-      content: '';
-      position: absolute;
-      bottom: -1px;
-      left: 0;
-      width: 100%;
-      height: 60px;
-      background: var(--color-light);
-      clip-path: polygon(0 100%, 100% 0, 100% 100%);
-    }
-    .hero-nombre {
-      font-family: var(--font-display);
-      font-size: clamp(2.5rem, 6vw, 4.5rem); /* responsive automático */
-      line-height: 1.1;
-    }
-    .hero-titulo {
-      color: var(--color-accent);
-      font-weight: 300;
-      font-size: 1.1rem;
-      letter-spacing: 0.12em;
-      text-transform: uppercase;
-    }
-    .hero-contacto a {
-      color: rgba(255,255,255,0.65);
-      text-decoration: none;
-      font-size: 0.88rem;
-      margin-right: 1.5rem;
-      transition: color 0.2s;
-    }
-    .hero-contacto a:hover { color: var(--color-accent); }
-
-    /* =====================================================
-      PASO 5 — SECCIONES GENERALES
-      Cada sección tiene un id="#..." que corresponde a los
-      links del navbar (href="#educacion" etc.)
-    ====================================================== */
-    section { padding: 4rem 0; }
-    section:nth-child(even) {
-      background-color: #fff;  /* alternamos blanco y fondo cálido */
-    }
-
-    .section-title {
-      font-family: var(--font-display);
-      font-size: 2rem;
-      position: relative;
-      display: inline-block;
-      margin-bottom: 2rem;
-    }
-    .section-title::after {
-      /* Subrayado rojo decorativo debajo del título */
-      content: '';
-      display: block;
-      width: 40px;
-      height: 3px;
-      background: var(--color-accent);
-      margin-top: 6px;
-    }
-
-    /* =====================================================
-      PASO 6 — TARJETAS DE EXPERIENCIA Y EDUCACIÓN
-      Usamos .card de Bootstrap y le agregamos estilos propios.
-      .border-0 y .shadow-sm son clases utilitarias de Bootstrap.
-    ====================================================== */
-    .exp-card {
-      border-left: 3px solid var(--color-accent);
-      padding-left: 1.25rem;
-      margin-bottom: 2rem;
-    }
-    .exp-empresa {
-      font-weight: 500;
-      font-size: 1rem;
-      color: var(--color-primary);
-    }
-    .exp-cargo {
-      font-family: var(--font-display);
-      font-size: 1.15rem;
-    }
-    .exp-fecha {
-      font-size: 0.8rem;
-      color: var(--color-muted);
-      text-transform: uppercase;
-      letter-spacing: 0.06em;
-    }
-    .exp-lista {
-      font-size: 0.9rem;
-      color: #444;
-      padding-left: 1rem;
-    }
-    .exp-lista li { margin-bottom: 4px; }
-
-    /* =====================================================
-      PASO 7 — BADGES / PILLS DE HABILIDADES
-      Bootstrap tiene la clase .badge para etiquetas.
-      Combinamos .badge con colores propios.
-    ====================================================== */
-    .skill-badge {
-      display: inline-block;
-      background-color: var(--color-primary);
-      color: #fff;
-      font-size: 0.78rem;
-      font-weight: 400;
-      letter-spacing: 0.06em;
-      padding: 6px 14px;
-      border-radius: 2px;
-      margin: 4px;
-    }
-    .skill-badge.tech { background-color: var(--color-accent); }
-
-    /* =====================================================
-      PASO 8 — PORTAFOLIO (galería con CSS Grid)
-      Bootstrap tiene su propio grid (.row .col-*) pero para
-      galerías de imágenes es más limpio usar CSS Grid nativo.
-    ====================================================== */
-    .portfolio-grid {
-      display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
-      gap: 1.5rem;
-    }
-    .portfolio-card {
-      background: #fff;
-      border: 1px solid #e0dcd6;
-      border-radius: 4px;
-      overflow: hidden;
-      transition: transform 0.25s, box-shadow 0.25s;
-    }
-    .portfolio-card:hover {
-      transform: translateY(-4px);
-      box-shadow: 0 12px 28px rgba(0,0,0,0.1);
-    }
-    .portfolio-img {
-      width: 100%;
-      height: 180px;
-      object-fit: cover;
-      background: #ddd;  /* placeholder si no hay imagen */
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      color: #999;
-      font-size: 0.85rem;
-    }
-    .portfolio-body { padding: 1rem; }
-    .portfolio-body h5 { font-family: var(--font-display); font-size: 1rem; }
-
-    /* =====================================================
-      PASO 9 — FOOTER
-      .bg-dark y .text-white son clases utilitarias de Bootstrap.
-      Las combinamos con estilos propios.
-    ====================================================== */
-    footer {
-      background-color: var(--color-primary);
-      color: rgba(255,255,255,0.6);
-      padding: 2.5rem 0;
-      font-size: 0.85rem;
-    }
-    footer a {
-      color: rgba(255,255,255,0.6);
-      text-decoration: none;
-      margin: 0 0.5rem;
-      transition: color 0.2s;
-    }
-    footer a:hover { color: var(--color-accent); }
-  </style>
+  <!-- PASO 2: Tu CSS propio (siempre después de Bootstrap) -->
+  <link rel="stylesheet" href="styles.css" />
 </head>
 
 <body>
 
-  <!-- =====================================================
-    PASO 3 — NAVBAR BOOTSTRAP
-    Estructura básica de una navbar responsive de Bootstrap:
-    - .navbar-toggler: botón hamburguesa (aparece en móvil)
-    - .collapse.navbar-collapse: menú que se oculta/muestra
-    - data-bs-toggle / data-bs-target: atributos que Bootstrap
-      necesita para que el botón hamburguesa funcione
-  ====================================================== -->
-  <nav class="navbar navbar-expand-lg sticky-top">
+  <!-- NAVBAR -->
+  <nav class="navbar navbar-expand-lg sticky-top cv-navbar">
     <div class="container">
-      <a class="navbar-brand" href="#">Camilo Sánchez</a>
+      <a class="navbar-brand cv-navbar-brand" href="#">Camilo Sánchez</a>
 
-      <!-- Botón hamburguesa (visible sólo en móvil) -->
       <button
         class="navbar-toggler border-0"
         type="button"
@@ -277,29 +39,24 @@
         <span class="navbar-toggler-icon"></span>
       </button>
 
-      <!-- Links del menú -->
       <div class="collapse navbar-collapse" id="navMenu">
         <ul class="navbar-nav ms-auto gap-2">
-          <li class="nav-item"><a class="nav-link" href="#resumen">Resumen</a></li>
-          <li class="nav-item"><a class="nav-link" href="#experiencia">Experiencia</a></li>
-          <li class="nav-item"><a class="nav-link" href="#educacion">Educación</a></li>
-          <li class="nav-item"><a class="nav-link" href="#habilidades">Habilidades</a></li>
-          <li class="nav-item"><a class="nav-link" href="#portafolio">Portafolio</a></li>
+          <li class="nav-item"><a class="nav-link cv-nav-link" href="#resumen">Resumen</a></li>
+          <li class="nav-item"><a class="nav-link cv-nav-link" href="#experiencia">Experiencia</a></li>
+          <li class="nav-item"><a class="nav-link cv-nav-link" href="#educacion">Educación</a></li>
+          <li class="nav-item"><a class="nav-link cv-nav-link" href="#habilidades">Habilidades</a></li>
+          <li class="nav-item"><a class="nav-link cv-nav-link" href="#portafolio">Portafolio</a></li>
         </ul>
       </div>
     </div>
   </nav>
 
-  <!-- =====================================================
-    PASO 4 — HERO
-    .container centra el contenido con márgenes automáticos.
-    Ancho máximo: 1140px (por defecto en Bootstrap).
-  ====================================================== -->
-  <header class="hero">
+  <!-- HERO -->
+  <header class="cv-hero">
     <div class="container">
-      <p class="hero-titulo mb-2">Soporte &amp; Administración · Full Stack Developer</p>
-      <h1 class="hero-nombre mb-3">Camilo<br />Sánchez</h1>
-      <div class="hero-contacto mt-3">
+      <p class="cv-hero-titulo mb-2">Soporte &amp; Administración · Full Stack Developer</p>
+      <h1 class="cv-hero-nombre mb-3">Camilo<br />Sánchez</h1>
+      <div class="cv-hero-contacto mt-3">
         <a href="mailto:camilobastiansanchez@gmail.com">camilobastiansanchez@gmail.com</a>
         <a href="tel:+56945586196">+56 9 4558 6196</a>
         <a href="https://www.linkedin.com/in/camilo-bastian-sanchez-31b29316b/" target="_blank">LinkedIn</a>
@@ -308,15 +65,10 @@
     </div>
   </header>
 
-  <!-- =====================================================
-    PASO 5 — RESUMEN
-    .container + .row + .col-* = sistema de columnas de Bootstrap.
-    Bootstrap divide la pantalla en 12 columnas.
-    .col-lg-8 = ocupa 8 de 12 columnas en pantallas grandes.
-  ====================================================== -->
-  <section id="resumen">
+  <!-- RESUMEN -->
+  <section id="resumen" class="cv-section">
     <div class="container">
-      <h2 class="section-title">Resumen</h2>
+      <h2 class="cv-section-title">Resumen</h2>
       <div class="row">
         <div class="col-lg-8">
           <p style="font-size:1.05rem; line-height:1.8; color:#333;">
@@ -331,21 +83,16 @@
     </div>
   </section>
 
-  <!-- =====================================================
-    PASO 6 — EXPERIENCIA
-    Cada trabajo es un bloque .exp-card.
-    No usamos .card de Bootstrap aquí sino un estilo propio
-    con border-left para dar el efecto de línea de tiempo.
-  ====================================================== -->
-  <section id="experiencia">
+  <!-- EXPERIENCIA -->
+  <section id="experiencia" class="cv-section-alt">
     <div class="container">
-      <h2 class="section-title">Experiencia</h2>
+      <h2 class="cv-section-title">Experiencia</h2>
 
-      <div class="exp-card">
-        <p class="exp-fecha">Febrero 2025 — Presente</p>
-        <p class="exp-cargo">Asistente Administrativo / Soporte a Usuarios</p>
-        <p class="exp-empresa">Colegio José Arrieta</p>
-        <ul class="exp-lista">
+      <div class="cv-exp-card">
+        <p class="cv-exp-fecha">Febrero 2025 — Presente</p>
+        <p class="cv-exp-cargo">Asistente Administrativo / Soporte a Usuarios</p>
+        <p class="cv-exp-empresa">Colegio José Arrieta</p>
+        <ul class="cv-exp-lista">
           <li>Gestión diaria de requerimientos de usuarios internos y externos.</li>
           <li>Organización de información y registros mediante Excel y herramientas digitales.</li>
           <li>Coordinación de entrega y control de equipos o recursos internos.</li>
@@ -353,32 +100,32 @@
         </ul>
       </div>
 
-      <div class="exp-card">
-        <p class="exp-fecha">Febrero 2022 — Noviembre 2023</p>
-        <p class="exp-cargo">Soporte Ejecutivo</p>
-        <p class="exp-empresa">ENTEL PCS</p>
-        <ul class="exp-lista">
+      <div class="cv-exp-card">
+        <p class="cv-exp-fecha">Febrero 2022 — Noviembre 2023</p>
+        <p class="cv-exp-cargo">Soporte Ejecutivo</p>
+        <p class="cv-exp-empresa">ENTEL PCS</p>
+        <ul class="cv-exp-lista">
           <li>Atención remota y presencial de clientes preferentes de cartera asignada.</li>
           <li>Seguimiento de requerimientos con respuesta máxima de 2 horas.</li>
-          <li>Administración de stock de bodegas, inventario, caja diaria y documentación.</li>
-          <li>Coordinación con distintas áreas de la compañía y reemplazos de jefatura.</li>
+          <li>Administración de stock, inventario, caja diaria y documentación.</li>
+          <li>Coordinación con distintas áreas y reemplazos de jefatura.</li>
         </ul>
       </div>
 
-      <div class="exp-card">
-        <p class="exp-fecha">Marzo 2019 — Diciembre 2021</p>
-        <p class="exp-cargo">Asesor</p>
-        <p class="exp-empresa">Nación Trade</p>
-        <ul class="exp-lista">
+      <div class="cv-exp-card">
+        <p class="cv-exp-fecha">Marzo 2019 — Diciembre 2021</p>
+        <p class="cv-exp-cargo">Asesor</p>
+        <p class="cv-exp-empresa">Nación Trade</p>
+        <ul class="cv-exp-lista">
           <li>Asesoría y soporte a alumnos sobre criptomonedas, Forex y acciones.</li>
         </ul>
       </div>
 
-      <div class="exp-card">
-        <p class="exp-fecha">Febrero 2018 — Noviembre 2018</p>
-        <p class="exp-cargo">Ejecutivo en Ventas</p>
-        <p class="exp-empresa">Distribuidora Los Robles Ltda.</p>
-        <ul class="exp-lista">
+      <div class="cv-exp-card">
+        <p class="cv-exp-fecha">Febrero 2018 — Noviembre 2018</p>
+        <p class="cv-exp-cargo">Ejecutivo en Ventas</p>
+        <p class="cv-exp-empresa">Distribuidora Los Robles Ltda.</p>
+        <ul class="cv-exp-lista">
           <li>Atención a clientes y venta de productos de la distribuidora.</li>
         </ul>
       </div>
@@ -386,141 +133,109 @@
     </div>
   </section>
 
-  <!-- =====================================================
-    PASO 7 — EDUCACIÓN Y CERTIFICACIONES
-    Usamos el sistema de grid de Bootstrap:
-    .row crea una fila, .col-md-6 divide en 2 columnas
-    a partir de pantallas medianas (≥768px).
-    En móvil se apilan verticalmente de forma automática.
-  ====================================================== -->
-  <section id="educacion">
+  <!-- EDUCACIÓN -->
+  <section id="educacion" class="cv-section">
     <div class="container">
-      <h2 class="section-title">Educación</h2>
+      <h2 class="cv-section-title">Educación</h2>
 
       <div class="row g-4">
-
-        <!-- Columna 1: Estudios formales -->
         <div class="col-md-6">
-          <div class="exp-card">
-            <p class="exp-fecha">En curso</p>
-            <p class="exp-cargo">Desarrollador Full Stack</p>
-            <p class="exp-empresa">Desafíos Latam</p>
+          <div class="cv-exp-card">
+            <p class="cv-exp-fecha">En curso</p>
+            <p class="cv-exp-cargo">Desarrollador Full Stack</p>
+            <p class="cv-exp-empresa">Desafíos Latam</p>
           </div>
-          <div class="exp-card">
-            <p class="exp-fecha">Marzo 2015 — Noviembre 2016</p>
-            <p class="exp-cargo">Técnico en Prevención de Riesgos Laborales</p>
-            <p class="exp-empresa">INACAP · Santiago</p>
+          <div class="cv-exp-card">
+            <p class="cv-exp-fecha">Marzo 2015 — Noviembre 2016</p>
+            <p class="cv-exp-cargo">Técnico en Prevención de Riesgos Laborales</p>
+            <p class="cv-exp-empresa">INACAP · Santiago</p>
           </div>
         </div>
 
-        <!-- Columna 2: Certificaciones -->
         <div class="col-md-6">
-          <h5 style="font-family: var(--font-display); margin-bottom:1rem;">Certificaciones</h5>
-          <div class="exp-card">
-            <p class="exp-fecha">Marzo 2025</p>
-            <p class="exp-cargo">Curso Cajero Bancario</p>
+          <h5 class="cv-section-title" style="font-size:1.2rem;">Certificaciones</h5>
+          <div class="cv-exp-card">
+            <p class="cv-exp-fecha">Marzo 2025</p>
+            <p class="cv-exp-cargo">Curso Cajero Bancario</p>
           </div>
-          <div class="exp-card">
-            <p class="exp-fecha">Diciembre 2024</p>
-            <p class="exp-cargo">Certificación de Inglés</p>
-          </div>
-        </div>
-
-      </div>
-    </div>
-  </section>
-
-  <!-- =====================================================
-    PASO 7 — HABILIDADES CON BADGES
-    .d-flex y .flex-wrap son clases utilitarias de Bootstrap
-    para alinear elementos en fila y que se envuelvan solos.
-  ====================================================== -->
-  <section id="habilidades">
-    <div class="container">
-      <h2 class="section-title">Habilidades</h2>
-
-      <div class="row g-4">
-        <div class="col-md-4">
-          <h6 style="text-transform:uppercase; letter-spacing:.08em; color:var(--color-muted); font-size:.8rem; margin-bottom:1rem;">Técnicas</h6>
-          <div>
-            <span class="skill-badge tech">HTML</span>
-            <span class="skill-badge tech">CSS</span>
-            <span class="skill-badge tech">Bootstrap</span>
-            <span class="skill-badge tech">Excel intermedio</span>
-            <span class="skill-badge tech">Word intermedio</span>
-          </div>
-        </div>
-        <div class="col-md-4">
-          <h6 style="text-transform:uppercase; letter-spacing:.08em; color:var(--color-muted); font-size:.8rem; margin-bottom:1rem;">Idiomas</h6>
-          <div>
-            <span class="skill-badge">Inglés B2</span>
-            <span class="skill-badge">Chino A1</span>
-          </div>
-        </div>
-        <div class="col-md-4">
-          <h6 style="text-transform:uppercase; letter-spacing:.08em; color:var(--color-muted); font-size:.8rem; margin-bottom:1rem;">Blandas</h6>
-          <div>
-            <span class="skill-badge">Trabajo en equipo</span>
-            <span class="skill-badge">Adaptabilidad</span>
-            <span class="skill-badge">Atención al cliente</span>
+          <div class="cv-exp-card">
+            <p class="cv-exp-fecha">Diciembre 2024</p>
+            <p class="cv-exp-cargo">Certificación de Inglés</p>
           </div>
         </div>
       </div>
     </div>
   </section>
 
-  <!-- =====================================================
-    PASO 8 — PORTAFOLIO
-    Aquí irán las imágenes de tus proyectos.
-    Por ahora hay placeholders — reemplaza src="" con
-    la ruta real de tus capturas (ej: img/proyecto1.png).
-    Las tarjetas usan CSS Grid propio (más flexible para galerías).
-  ====================================================== -->
-  <section id="portafolio">
+  <!-- HABILIDADES -->
+  <section id="habilidades" class="cv-section-alt">
     <div class="container">
-      <h2 class="section-title">Portafolio</h2>
+      <h2 class="cv-section-title">Habilidades</h2>
+
+      <div class="row g-4">
+        <div class="col-md-4">
+          <p class="cv-skill-label">Técnicas</p>
+          <div>
+            <span class="cv-skill-badge cv-skill-badge--tech">HTML</span>
+            <span class="cv-skill-badge cv-skill-badge--tech">CSS</span>
+            <span class="cv-skill-badge cv-skill-badge--tech">Bootstrap</span>
+            <span class="cv-skill-badge cv-skill-badge--tech">Excel intermedio</span>
+            <span class="cv-skill-badge cv-skill-badge--tech">Word intermedio</span>
+          </div>
+        </div>
+        <div class="col-md-4">
+          <p class="cv-skill-label">Idiomas</p>
+          <div>
+            <span class="cv-skill-badge">Inglés B2</span>
+            <span class="cv-skill-badge">Chino A1</span>
+          </div>
+        </div>
+        <div class="col-md-4">
+          <p class="cv-skill-label">Blandas</p>
+          <div>
+            <span class="cv-skill-badge">Trabajo en equipo</span>
+            <span class="cv-skill-badge">Adaptabilidad</span>
+            <span class="cv-skill-badge">Atención al cliente</span>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- PORTAFOLIO -->
+  <section id="portafolio" class="cv-section">
+    <div class="container">
+      <h2 class="cv-section-title">Portafolio</h2>
       <p style="color:var(--color-muted); margin-bottom:2rem; font-size:.95rem;">
         Proyectos desarrollados durante el bootcamp Full Stack en Desafíos Latam.
       </p>
 
-      <div class="portfolio-grid">
+      <div class="cv-portfolio-grid">
 
-        <div class="portfolio-card">
-          <div class="portfolio-img">[ imagen proyecto 1 ]</div>
-          <div class="portfolio-body">
-            <h5>Proyecto 1</h5>
-            <p style="font-size:.85rem; color:#666; margin-bottom:.75rem;">
-              Descripción breve del proyecto. Tecnologías: HTML, CSS.
-            </p>
-            <a href="#" style="font-size:.8rem; color:var(--color-accent); text-decoration:none; font-weight:500;">
-              Ver en GitHub →
-            </a>
+        <div class="cv-portfolio-card">
+          <div class="cv-portfolio-img">[ imagen proyecto 1 ]</div>
+          <div class="cv-portfolio-body">
+            <h5 class="cv-portfolio-title">Proyecto 1</h5>
+            <p class="cv-portfolio-desc">Descripción breve. Tecnologías: HTML, CSS.</p>
+            <a href="#" class="cv-portfolio-link">Ver en GitHub →</a>
           </div>
         </div>
 
-        <div class="portfolio-card">
-          <div class="portfolio-img">[ imagen proyecto 2 ]</div>
-          <div class="portfolio-body">
-            <h5>Proyecto 2</h5>
-            <p style="font-size:.85rem; color:#666; margin-bottom:.75rem;">
-              Descripción breve del proyecto. Tecnologías: Bootstrap.
-            </p>
-            <a href="#" style="font-size:.8rem; color:var(--color-accent); text-decoration:none; font-weight:500;">
-              Ver en GitHub →
-            </a>
+        <div class="cv-portfolio-card">
+          <div class="cv-portfolio-img">[ imagen proyecto 2 ]</div>
+          <div class="cv-portfolio-body">
+            <h5 class="cv-portfolio-title">Proyecto 2</h5>
+            <p class="cv-portfolio-desc">Descripción breve. Tecnologías: Bootstrap.</p>
+            <a href="#" class="cv-portfolio-link">Ver en GitHub →</a>
           </div>
         </div>
 
-        <div class="portfolio-card">
-          <div class="portfolio-img">[ imagen proyecto 3 ]</div>
-          <div class="portfolio-body">
-            <h5>Proyecto 3</h5>
-            <p style="font-size:.85rem; color:#666; margin-bottom:.75rem;">
-              Descripción breve del proyecto. Tecnologías: HTML, CSS, JS.
-            </p>
-            <a href="#" style="font-size:.8rem; color:var(--color-accent); text-decoration:none; font-weight:500;">
-              Ver en GitHub →
-            </a>
+        <div class="cv-portfolio-card">
+          <div class="cv-portfolio-img">[ imagen proyecto 3 ]</div>
+          <div class="cv-portfolio-body">
+            <h5 class="cv-portfolio-title">Proyecto 3</h5>
+            <p class="cv-portfolio-desc">Descripción breve. Tecnologías: HTML, CSS, JS.</p>
+            <a href="#" class="cv-portfolio-link">Ver en GitHub →</a>
           </div>
         </div>
 
@@ -528,33 +243,21 @@
     </div>
   </section>
 
-  <!-- =====================================================
-    PASO 9 — FOOTER
-    .text-center es una clase utilitaria de Bootstrap.
-    Siempre al final del <body>.
-  ====================================================== -->
-  <footer>
+  <!-- FOOTER -->
+  <footer class="cv-footer">
     <div class="container text-center">
       <p class="mb-2">
         <a href="mailto:camilobastiansanchez@gmail.com">camilobastiansanchez@gmail.com</a>
         <a href="tel:+56945586196">+56 9 4558 6196</a>
         <a href="https://www.linkedin.com/in/camilo-bastian-sanchez-31b29316b/" target="_blank">LinkedIn</a>
-        <a href="https://github.com/" target="_blank">GitHub</a>
+        <a href="https://github.com/Camilo-Bastian-Sanchez" target="_blank">GitHub</a>
       </p>
-      <p style="margin:0; font-size:.8rem;">© 2025 Camilo Sánchez · Santiago, Chile</p>
+      <p class="cv-footer-copy">© 2025 Camilo Sánchez · Santiago, Chile</p>
     </div>
   </footer>
 
-  <!-- =====================================================
-    PASO 1b — SCRIPT DE BOOTSTRAP (JavaScript)
-    El JS de Bootstrap va siempre al FINAL del <body>,
-    justo antes de </body>. Esto permite que el HTML
-    cargue primero y la página se vea más rápido.
-    Es necesario para que funcione el menú hamburguesa.
-  ====================================================== -->
-  <script
-    src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js">
-  </script>
+  <!-- Bootstrap JS (siempre al final del body) -->
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
 
 </body>
 </html>
